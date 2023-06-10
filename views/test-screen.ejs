@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>test screen - Fix Screen Color Errors on Your Computer</title>
+    <meta name="description"
+        content="screen test is a website that provides information and solutions for fixing black screen errors on your computer.">
+
+    <style>
+        body {
+            background-color: white;
+        }
+        #buttons {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="buttons">
+        <button onclick="location.href='/'">Go Home</button>
+        <button onclick="openFullscreen()">Full Screen</button>
+        <button onclick="changeColor()">Change Color</button>
+    </div>
+
+    <script>
+        var elem = document.documentElement;
+        var buttons = document.getElementById("buttons");
+        var colors = ["#FF0000", "#0000ff", "#00ff00"];
+        var colorIndex = 0;
+
+        function openFullscreen() {
+            if (elem.requestFullscreen) {
+                elem.requestFullscreen();
+            } else if (elem.mozRequestFullScreen) { /* Firefox */
+                elem.mozRequestFullScreen();
+            } else if (elem.webkitRequestFullscreen) { /* Chrome, Safari & Opera */
+                elem.webkitRequestFullscreen();
+            } else if (elem.msRequestFullscreen) { /* IE/Edge */
+                elem.msRequestFullscreen();
+            }
+            buttons.style.display = "none";
+        }
+
+        function changeColor() {
+            document.body.style.backgroundColor = colors[colorIndex];
+            colorIndex = (colorIndex + 1) % colors.length;
+        }
+
+        document.addEventListener("click", function() {
+            if (document.fullscreenElement) {
+                buttons.style.display = "none";
+            } else {
+                buttons.style.display = "block";
+            }
+        });
+    </script>
+</body>
+</html>

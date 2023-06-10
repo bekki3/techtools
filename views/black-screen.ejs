@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Blackcreen - Fix Black Screen Errors on Your Computer</title>
+    <meta name="description"
+        content="Blackscreen is a website that provides information and solutions for fixing black screen errors on your computer.">
+
+    <style>
+        body {
+            background-color: rgb(0, 0, 0);
+        }
+        #buttons {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="buttons">
+        <button onclick="location.href='/'">Go Home</button>
+        <button onclick="openFullscreen()">Full Screen</button>
+    </div>
+
+    <script>
+        var elem = document.documentElement;
+        var buttons = document.getElementById("buttons");
+
+        function openFullscreen() {
+            if (elem.requestFullscreen) {
+                elem.requestFullscreen();
+            } else if (elem.mozRequestFullScreen) { /* Firefox */
+                elem.mozRequestFullScreen();
+            } else if (elem.webkitRequestFullscreen) { /* Chrome, Safari & Opera */
+                elem.webkitRequestFullscreen();
+            } else if (elem.msRequestFullscreen) { /* IE/Edge */
+                elem.msRequestFullscreen();
+            }
+            buttons.style.display = "none";
+        }
+
+        document.addEventListener("click", function() {
+            if (document.fullscreenElement) {
+                buttons.style.display = "none";
+            } else {
+                buttons.style.display = "block";
+            }
+        });
+    </script>
+</body>
+</html>
